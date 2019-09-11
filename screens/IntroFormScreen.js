@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { init } from '@rematch/core';
 import { connect } from 'react-redux';
 import { View, Text, TextInput, Button, Dimensions, AsyncStorage } from 'react-native';
+import {app} from "../models/appModel";
+
+const store = init( {
+    models: { app },
+});
 
 const { width } = Dimensions.get('window');
 
@@ -21,18 +27,13 @@ const styleSheet = {
         width: '100%',
         height: 40,
         borderColor: 'black',
-        borderWidth: 2
+        borderWidth: 1
     },
 };
 
 const IntroFormScreen = props => {
 
-    async function handleSubmit() {
-        if(name !== '') {
-            await AsyncStorage.setItem('name', name);
-            navigation.navigate('Welcome');
-        }
-    }
+    app.effects.handleSubmit();
 
     const [name, setName] = useState('');
     const {dispatch, navigation} = props;

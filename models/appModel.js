@@ -1,11 +1,20 @@
+import {AsyncStorage} from "react-native";
+
 export const app = {
     state: {
-        name:'',
+        name: '',
     },
     reducers: {
-        setName(state,name) {
-            return {... state,name};
+        setName(state, name) {
+            return {...state, name};
         },
     },
-    effects:{},
+    effects: {
+        async handleSubmit() {
+            if(name !== '') {
+                await AsyncStorage.setItem('name', name);
+                navigation.navigate('Welcome');
+            }
+        }
+    },
 };

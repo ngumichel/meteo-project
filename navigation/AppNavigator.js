@@ -9,7 +9,7 @@ import IntroFormScreen from "../screens/IntroFormScreen";
 
 const AppNavigator = createBottomTabNavigator({
     Home: HomeScreen,
-    Intro: IntroScreen,
+    Intro: IntroFormScreen,
     Auth: AuthLoadingScreen
 }, {
     initialRouteName: 'Home',

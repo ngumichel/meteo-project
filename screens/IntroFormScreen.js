@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { init } from '@rematch/core';
-import { connect } from 'react-redux';
-import { View, Text, TextInput, Button, Dimensions, AsyncStorage } from 'react-native';
+import {init} from '@rematch/core';
+import {connect} from 'react-redux';
+import {View, Text, TextInput, Button, Dimensions, AsyncStorage} from 'react-native';
 import {app} from "../models/appModel";
 
-const store = init( {
-    models: { app },
-});
-
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const styleSheet = {
     container: {
@@ -33,10 +29,20 @@ const styleSheet = {
 
 const IntroFormScreen = props => {
 
-    app.effects.handleSubmit();
-
     const [name, setName] = useState('');
     const {dispatch, navigation} = props;
+
+    function handleSubmit() {
+        if(name !== '') {
+
+            dispatch({
+                type: 'app/setName',
+                payload: { name }
+            });
+
+            navigation.navigate('Welcome');
+        }
+    }
 
     return (
         <View style={styleSheet.container}>

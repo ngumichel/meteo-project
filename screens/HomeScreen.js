@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Dimensions } from 'react-native';
+import {connect} from 'react-redux';
+import {View, Text, Dimensions} from 'react-native';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const styleSheet = {
     container: {
@@ -19,12 +20,17 @@ const styleSheet = {
     }
 };
 
-const HomeScreen = props => (
-    <View style={styleSheet.container}>
-        <Text style={styleSheet.textStyle}>Hello!</Text>
-    </View>
-);
+const HomeScreen = props => {
+
+    const name = props.app.name;
+
+    return (
+        <View style={styleSheet.container}>
+            <Text style={styleSheet.textStyle}>{`Hello ${name}!`}</Text>
+        </View>
+    );
+};
 
 HomeScreen.propTypes = {};
 
-export default HomeScreen;
+export default connect(state => state)(HomeScreen);

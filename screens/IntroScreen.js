@@ -32,14 +32,14 @@ const IntroScreen = props => {
     useEffect(() => {
         setTimeout(() => {
             props.navigation.navigate('App');
-        }, 5000);
+        }, 3000);
     }, []);
 
     const [name, setName] = useState('');
 
     return (
         <View style={styleSheet.container}>
-            <Text style={styleSheet.nameStyle}>{name}</Text>
+            <Text style={styleSheet.nameStyle}>{`Welcome ${props.app.name}!`}</Text>
         </View>
     );
 };
@@ -50,4 +50,4 @@ IntroScreen.propTypes = {
     }).isRequired,
 };
 
-export default IntroScreen;
+export default connect (state => state)(IntroScreen);

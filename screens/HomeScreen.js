@@ -21,12 +21,9 @@ const styleSheet = {
 };
 
 const HomeScreen = props => {
-
-    const name = props.app.name;
-
     return (
         <View style={styleSheet.container}>
-            <Text style={styleSheet.textStyle}>{`Hello ${name}!`}</Text>
+            <Text style={styleSheet.textStyle}>Hello!!</Text>
         </View>
     );
 };

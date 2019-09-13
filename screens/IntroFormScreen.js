@@ -50,7 +50,6 @@ const IntroFormScreen = props => {
             <TextInput style={styleSheet.input} onChangeText={(text) => setName(text)} value={name}/>
             <Button onPress={handleSubmit} title="OK" color="#EAC255"/>
         </View>
-
     );
 
 };

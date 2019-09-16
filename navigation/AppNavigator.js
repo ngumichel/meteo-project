@@ -17,9 +17,9 @@ const AppNavigator = createBottomTabNavigator({
         Edit: EditScreen,
     },
     {
-        defaultNavigationOptions: ({ navigation }) => ({
-            tabBarIcon: ({ focused, horizontal, tintColor }) => {
-                const { routeName } = navigation.state;
+        defaultNavigationOptions: ({navigation}) => ({
+            tabBarIcon: ({focused, horizontal, tintColor}) => {
+                const {routeName} = navigation.state;
                 let IconComponent = Ionicons;
                 let iconName;
                 if (routeName === 'Home') {
@@ -29,7 +29,7 @@ const AppNavigator = createBottomTabNavigator({
                 } else if (routeName === 'Edit') {
                     iconName = `ios-settings`;
                 }
-                return <IconComponent name={iconName} size={25} color={tintColor} />
+                return <IconComponent name={iconName} size={25} color={tintColor}/>
             },
         }),
         tabBarOptions: {

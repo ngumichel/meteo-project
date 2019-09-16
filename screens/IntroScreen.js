@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { View, Text, Dimensions, AsyncStorage } from 'react-native';
+import {connect} from 'react-redux';
+import {View, Text, Dimensions, AsyncStorage} from 'react-native';
 import {get} from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const styleSheet = {
     container: {
@@ -27,6 +27,7 @@ const IntroScreen = props => {
             const temp = await AsyncStorage.getItem('name');
             setName(temp);
         }
+
         getName();
     }, []);
     useEffect(() => {
@@ -50,4 +51,4 @@ IntroScreen.propTypes = {
     }).isRequired,
 };
 
-export default connect (state => state)(IntroScreen);
+export default connect(state => state)(IntroScreen);

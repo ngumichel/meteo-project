@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Dimensions, Text, TextInput, View} from "react-native";
+import {Button, Dimensions, Text, TextInput, View, AsyncStorage} from "react-native";
 import {connect} from 'react-redux';
 
 const {width} = Dimensions.get('window');
@@ -27,9 +27,25 @@ const styleSheet = {
 
 const EditScreen = props => {
 
-console.log(props);
+    const [name, setName] = useState('');
+    const {dispatch, navigation} = props;
 
-return null;
+   async function handleSubmit() {
+       await AsyncStorage.setItem('name', name);
+        dispatch({
+            type: 'app/setName',
+            payload: {name}
+        });
+        navigation.navigate('Home');
+    }
+
+    return (
+        <View style={styleSheet.container}>
+            <Text style={styleSheet.label}>Prénom</Text>
+            <TextInput class="form-input" style={styleSheet.input} onChangeText={(text) => setName(text)} value={name}/>
+            <Button onPress={handleSubmit} title="OK" color="#EAC255"/>
+        </View>
+    );
 
 };
 

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {init} from '@rematch/core';
 import {connect} from 'react-redux';
 import {View, Text, TextInput, Button, Dimensions, AsyncStorage} from 'react-native';
 import {app} from "../models/appModel";
@@ -9,7 +8,7 @@ const {width} = Dimensions.get('window');
 
 const styleSheet = {
     container: {
-        width: width,
+        width: '100%',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -18,13 +17,20 @@ const styleSheet = {
     label: {
         color: 'red',
         fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
     },
     input: {
-        width: '100%',
+        width: '90%',
         height: 40,
         borderColor: 'black',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 15,
     },
+    button: {
+        titleColor: 'red',
+    }
 };
 
 const IntroFormScreen = props => {
@@ -32,12 +38,12 @@ const IntroFormScreen = props => {
     const [name, setName] = useState('');
     const {dispatch, navigation} = props;
 
-    function handleSubmit() {
-        if(name !== '') {
-
+    async function handleSubmit() {
+        if (name !== '') {
+            await AsyncStorage.setItem('name', name);
             dispatch({
                 type: 'app/setName',
-                payload: { name }
+                payload: {name}
             });
 
             navigation.navigate('Welcome');
@@ -48,7 +54,7 @@ const IntroFormScreen = props => {
         <View style={styleSheet.container}>
             <Text style={styleSheet.label}>Prénom</Text>
             <TextInput style={styleSheet.input} onChangeText={(text) => setName(text)} value={name}/>
-            <Button onPress={handleSubmit} title="OK" color="#EAC255"/>
+            <Button style={styleSheet.button} onPress={handleSubmit} title="OK"/>
         </View>
     );
 

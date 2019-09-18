@@ -40,7 +40,7 @@ const IntroScreen = props => {
 
     return (
         <View style={styleSheet.container}>
-            <Text style={styleSheet.nameStyle}>{`Welcome ${props.app.name}!`}</Text>
+            <Text style={styleSheet.nameStyle}>{`Welcome ${props.app.name ? props.app.name : name}!`}</Text>
         </View>
     );
 };

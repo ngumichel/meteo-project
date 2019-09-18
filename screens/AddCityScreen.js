@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Text, TextInput, View, FlatList} from "react-native";
+import {Text, TextInput, View, FlatList} from "react-native";
+import {Button} from 'react-native-elements';
+import { SearchBar } from 'react-native-elements';
 import {connect} from 'react-redux';
-import {Item} from "react-native-paper";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const styleSheet = {
     container: {
@@ -10,25 +12,9 @@ const styleSheet = {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        marginTop: 24,
     },
-    label: {
-        color: 'red',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    input: {
-        width: '90%',
-        height: 40,
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 5,
-        marginBottom: 15,
-    },
-    button: {
-        titleColor: 'red',
-    }
+
 };
 
 const AddCityScreen = props => {
@@ -48,10 +34,12 @@ const AddCityScreen = props => {
 
     return (
         <View style={styleSheet.container}>
-            <Text style={styleSheet.label}>Nom de la ville</Text>
-            <TextInput class="form-input" style={styleSheet.input} onChangeText={(text) => setCity(text)}
-                       value={city}/>
-            <Button onPress={handleSubmit} title="OK" color="#CEA255"/>
+            <SearchBar
+                placeholder="Type Here..."
+                onChangeText={(text) => setCity(text)}
+                value={city}
+                onBlur={handleSubmit}
+            />
             <FlatList
                 data={cities}
                 renderItem={({item}) => <Text>{item}</Text>}

@@ -7,7 +7,7 @@ const {width} = Dimensions.get('window');
 
 const styleSheet = {
     container: {
-        width: width,
+        width: '100%',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -16,13 +16,20 @@ const styleSheet = {
     label: {
         color: 'red',
         fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
     },
     input: {
-        width: '100%',
+        width: '90%',
         height: 40,
         borderColor: 'black',
-        borderWidth: 1
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 15,
     },
+    button: {
+        titleColor: 'red',
+    }
 };
 
 const EditScreen = props => {
@@ -30,20 +37,20 @@ const EditScreen = props => {
     const [name, setName] = useState('');
     const {dispatch, navigation} = props;
 
-   async function handleSubmit() {
-       await AsyncStorage.setItem('name', name);
+    async function handleSubmit() {
+        await AsyncStorage.setItem('name', name);
         dispatch({
             type: 'app/setName',
             payload: {name}
         });
-        navigation.navigate('Home');
+        navigation.navigate('Welcome');
     }
 
     return (
         <View style={styleSheet.container}>
             <Text style={styleSheet.label}>Prénom</Text>
             <TextInput class="form-input" style={styleSheet.input} onChangeText={(text) => setName(text)} value={name}/>
-            <Button onPress={handleSubmit} title="OK" color="#EAC255"/>
+            <Button {...props} onPress={handleSubmit} title="OK"/>
         </View>
     );
 

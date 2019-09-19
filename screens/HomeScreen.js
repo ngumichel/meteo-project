@@ -51,37 +51,30 @@ const HomeScreen = props => {
         _getLocationAsync();
     }, []);
 
-    useEffect(() => {
-        dispatch({type: 'app/getMeteoInformations', payload: 'valence'})
-    }, []);
-
-    useEffect(() => {
-        if (informations.main) {
-            setNameCity(informations.name);
-            setTemp(informations.main.temp);
-        }
-    });
-
-    console.log(informations);
-
-    const renderItem = ({item}) => (
-        <View style={styleSheet.container}>
-            <Text style={styleSheet.textStyle}>{`Ville: ${nameCity}`}</Text>
-            <Text style={styleSheet.textStyle}>{`Temperature: ${Math.round(temp)}°C`}</Text>
-            {error !== '' && <Text style={styleSheet.errorStyle}>{error}</Text>}
-        </View>
-    );
-
-
     return (
-
         <FlatList
-            data={[informations]}
-            renderItem={renderItem}
-            keyExtractor={item => String(item.id)}
+            data={cities}
+            renderItem={({item}) => {
+                const infosCity = informations[item];
+                const linkicon = "../assets/weather/001.png";
+                return (
+                    <View>
+                        <ListItem
+                            title={infosCity.name}
+                            titleStyle={{fontWeight: 'bold', color: 'white'}}
+                            leftAvatar={{
+                                imageProps: {backgroundColor: '#707070',},
+                                source: require(linkicon)
+                            }}
+                            containerStyle={{backgroundColor: '#505050'}}
+                            bottomDivider
+                            chevron
+                        />
+                    </View>
+                )
+            }}
+            keyExtractor={item => String(item)}
         />
-
-
     );
 };
 

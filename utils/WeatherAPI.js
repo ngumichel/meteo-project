@@ -8,7 +8,6 @@ export function requestGet(endPoint, query = '') {
     };
 
     endPoint = `${endPoint}?${query}&units=metric&APPID=${apiKey}`;
-    console.log(endPoint);
     return fetch(baseUrl + endPoint, {
         method: 'GET',
         headers,

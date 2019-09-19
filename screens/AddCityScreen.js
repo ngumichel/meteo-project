@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Text, TextInput, View, FlatList} from "react-native";
-import {Button} from 'react-native-elements';
-import { SearchBar } from 'react-native-elements';
+import {SearchBar, ListItem, Card, Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 import Icon from "react-native-vector-icons/FontAwesome";
+
 
 const styleSheet = {
     container: {
@@ -21,7 +21,7 @@ const AddCityScreen = props => {
 
     const [city, setCity] = useState('');
     const {dispatch, navigation} = props;
-    const {cities} = props;
+    const {cities, informations, searchInformations} = props;
 
     function handleSubmit() {
         if (city !== '') {
@@ -32,6 +32,10 @@ const AddCityScreen = props => {
         }
     }
 
+    const renderItem = ({item}) => (
+        <Text>{item}</Text>
+    );
+
     return (
         <View style={styleSheet.container}>
             <SearchBar
@@ -40,9 +44,10 @@ const AddCityScreen = props => {
                 value={city}
                 onBlur={handleSubmit}
             />
+
             <FlatList
                 data={cities}
-                renderItem={({item}) => <Text>{item}</Text>}
+                renderItem={renderItem}
                 keyExtractor={item => item}
             />
         </View>
